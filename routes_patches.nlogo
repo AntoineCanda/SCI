@@ -3,12 +3,12 @@
 ;
 
 to init
-  set heading 90 * random 4
+  set heading 180 * random 4
 end
 
 to make-roads
   clear-all
-  crt 1 [ init ] 
+  crt 1 [ init ]
   reset-ticks
   while [count turtles > 0]
     [ ask turtles [ build ]
@@ -21,9 +21,9 @@ to build
   set pcolor yellow
   let h heading
   ifelse (not any? (patch-set (patch-at-heading-and-distance (h + 90) 1) (patch-at-heading-and-distance (h - 90) 1)) with [pcolor = yellow])
-    [ if (random 100 < proba-turn)
-      [ if (random 100 < proba-continue) 
-        [ hatch 1 [ fd 1 ]]    
+    [ if (random 100 < 5)
+      [ if (random 100 < 45)
+        [ hatch 1 [ fd 1 ]]
       ifelse (random 1 = 0) [ left 90 ] [ right 90 ] ]
   fd 1
   ]
@@ -54,7 +54,7 @@ to advance
   ifelse (not any? (patch-set f r l))
     [ right 180 ]
     [ move-to one-of (patch-set f r l)
-      ifelse ((patch-set patch-here) =  r) [right 90] 
+      ifelse ((patch-set patch-here) =  r) [right 90]
         [ if ((patch-set patch-here) =  l) [left 90] ]]
 end
 
@@ -65,17 +65,17 @@ to advance2
   ifelse (not any? ((patch-set f r l) with [pcolor = yellow]))
     [ right 180 ]
     [ move-to one-of ((patch-set f r l) with [pcolor = yellow])
-      ifelse (patch-here =  r) [right 90] 
+      ifelse (patch-here =  r) [right 90]
         [ if (patch-here =  l) [left 90] ]]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 264
 10
-1121
-888
-60
-60
+1119
+866
+-1
+-1
 7.0
 1
 10
@@ -105,7 +105,7 @@ proba-turn
 proba-turn
 0
 30
-6
+5.0
 1
 1
 %
@@ -120,7 +120,7 @@ proba-continue
 proba-continue
 0
 100
-100
+50.0
 1
 1
 %
@@ -198,7 +198,7 @@ nb-cars
 nb-cars
 0
 100
-100
+100.0
 1
 1
 NIL
@@ -557,9 +557,8 @@ false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
-
 @#$#@#$#@
-NetLogo 5.2.0
+NetLogo 6.0.2
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -575,7 +574,6 @@ true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
-
 @#$#@#$#@
 0
 @#$#@#$#@
